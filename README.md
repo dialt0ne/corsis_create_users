@@ -11,6 +11,10 @@ Attributes
 ----------
 ```
     "meta-bucket": "fhqwhgads-meta",
+    "aws_auth": {
+        "aws_access": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "aws_secret": "thefiveboxingwizardsjumpedquickly"
+    },
     "corsis_create_users": {
         "corsis": {
             "gid": 2001,
