@@ -5,16 +5,12 @@ This cookbook creates accounts for your favorite sysadmins.
 Requirements
 ------------
 #### packages
-- `s3` - `corsis_create_users` needs s3 to download ssh public keys.
+- `s3_file` - `corsis_create_users` needs [s3_file](http://community.opscode.com/cookbooks/s3_file) to download ssh public keys.
 
 Attributes
 ----------
 ```
     "meta-bucket": "fhqwhgads-meta",
-    "aws_auth": {
-        "aws_access": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "aws_secret": "thefiveboxingwizardsjumpedquickly"
-    },
     "corsis_create_users": {
         "corsis": {
             "gid": 2001,
@@ -64,7 +60,7 @@ Contributing
 
 License and Authors
 -------------------
-Authors: Anthony Tonns <atonns@corsis.com>
+Authors: Anthony Tonns <atonns@corsis.com>, Jeff Kaplan <jkaplan@corsis.com>
 
 Copyright 2014 Corsis
 http://www.corsis.com/

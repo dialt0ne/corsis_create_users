@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "s3"
+include_recipe "s3_file"
 
 # create accounts, setup authorized_keys
 if node.has_key? "corsis_create_users"
@@ -50,18 +50,17 @@ if node.has_key? "corsis_create_users"
                         action :create
                     end
                     # need aws auth info to get the authorized_keys files
-                    if node.has_key? "meta-bucket" and node.has_key? "aws_auth"
+                    if node.has_key? "meta-bucket" 
                         # place the user's public key file
                         lfile = "/home/#{username}/.ssh/authorized_keys"
-                        rfile = "s3://#{node['meta-bucket']}/common/ssh-public-keys/#{username}.pub"
-                        s3_aware_remote_file lfile do
-                            source rfile
-                            access_key_id node['aws_auth']['aws_access']
-                            secret_access_key node['aws_auth']['aws_secret']
-                            owner username
-                            group groupname
-                            mode 00600
-                            only_if { node['aws_auth'].has_key? "aws_access" and node['aws_auth'].has_key? "aws_secret" }
+                        rfile = "/common/ssh-public-keys/#{username}.pub"
+                        s3_file lfile do
+                        	remote_path rfile
+                        	bucket node['meta-bucket']
+                        	owner username
+                         	group groupname
+                         	mode "0600"
+                        	action :create
                         end
                     end
                 end
